@@ -21,10 +21,12 @@ class CreateProjectsTable extends Migration
             $table->string('img')->nullable();
             $table->date('start_project');
             $table->date('end_project')->nullable();
+            $table->tinyInteger('type')->nullable()->default('0');
             $table->unsignedBigInteger('manager_project');
             $table->bigInteger('price');
-            $table->string('page');
-            $table->integer('section_id');
+            $table->unsignedBigInteger('page_id');
+            $table->foreign('page_id')->references('id')->on('pages')->onDelete('cascade');
+            $table->unsignedBigInteger('section_id');
             $table->foreign('section_id')->references('id')->on('sections')->onDelete('cascade');
             $table->timestamps();
         });

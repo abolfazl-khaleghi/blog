@@ -20,12 +20,12 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->bigInteger('codeUser');
-            $table->tinyInteger('status');
-            $table->tinyInteger('isAdmin');
-            $table->bigInteger('phone');
-            $table->string('username');
-            $table->tinyInteger('isRole');
+            $table->bigInteger('codeUser')->nullable();
+            $table->tinyInteger('status')->default(0);
+            $table->tinyInteger('isAdmin')->default(0);
+            $table->bigInteger('phone')->nullable();
+            $table->string('username')->nullable();
+            $table->tinyInteger('isRole')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
