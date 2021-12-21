@@ -1,6 +1,8 @@
-
-@extends('layouts.app')
-
+@extends('admin.layouts.content', ['title'=>' لیست دسته بندی'])
+@section('breadcrumb')
+    <li class="breadcrumb-item"><a href="/category">پنل مدیریت</a></li>
+    <li class="breadcrumb-item active"> لیست دسته بندی</li>
+@endsection
 @section('content')
     <div class="main-content">
         <div class="tab__box">
@@ -9,7 +11,7 @@
                     <i class="fa fa-refresh"></i>
                     دسته بندی ها
                 </a>
-                <a  class="btn btn-primary" href="{{route('category.create')}}">دسته بندی  جدید</a>
+                <a class="btn btn-primary" href="{{route('category.create')}}">دسته بندی جدید</a>
             </div>
         </div>
         <div class="table__box">
@@ -20,7 +22,7 @@
                     <th>ردیف</th>
                     <th>نام دسته بندی</th>
                     <th> نام مستعار</th>
-                    <th>وضعیت</th>
+                    {{--                    <th>وضعیت</th>--}}
                     <th>عملیات</th>
                 </tr>
                 </thead>
@@ -29,37 +31,42 @@
 
                 <tr role="row">
                     @foreach ($categories  as $category)
-{{--                        @switch($category->status)--}}
-{{--                            @case(0)--}}
-{{--                            @php--}}
-{{--                                $url=route('category.updateStatus',' $category->id');--}}
-{{--                                $status="غیرفعال"--}}
-{{--                            @endphp--}}
-{{--                            @break--}}
-{{--                            @case(1)--}}
-{{--                            @php--}}
-{{--                                $url=route('category.updateStatus','$category->id');--}}
-{{--                                $status=' فعال'--}}
-{{--                            @endphp--}}
-{{--                            @break--}}
-{{--                            @default--}}
+                        {{--                        @switch($category->status)--}}
+                        {{--                            @case(0)--}}
+                        {{--                            @php--}}
+                        {{--                                $url=route('category.updateStatus',' $category->id');--}}
+                        {{--                                $status="غیرفعال"--}}
+                        {{--                            @endphp--}}
+                        {{--                            @break--}}
+                        {{--                            @case(1)--}}
+                        {{--                            @php--}}
+                        {{--                                $url=route('category.updateStatus','$category->id');--}}
+                        {{--                                $status=' فعال'--}}
+                        {{--                            @endphp--}}
+                        {{--                            @break--}}
+                        {{--                            @default--}}
 
-{{--                        @endswitch--}}
+                        {{--                        @endswitch--}}
 
                         <td><a href="">  {{ $loop->index+1 }}</a></td>
                         <td><a href="">{{$category->name}}</a></td>
                         <td><a href="">{{$category->description}}</a></td>
-                        <td><img src="{{ asset('img/category/1400') }}/{{$category->img}}" alt="{{$category->name}}" width="50px" height="50px"></td>
+                        {{--                        <td><img src="{{ asset('img/category/1400') }}/{{$category->img}}" alt="{{$category->name}}" width="50px" height="50px"></td>--}}
 
 
                         <td>
 
                             <div class="btn-group">
-                                <a class="btn  btn-danger  btn-sm" href="{{route('category.destroy',$category->id)}}"   onclick="return confirm('آیا آیتم مورد نظر حذف گردد') " class="item-delete mlg-15" title="حذف">
+                                <form action="{{ route('category.destroy', $category->id)}}" method="post">
+                                    @method('DELETE')
+                                    @csrf
+                                    <input class="btn  btn-danger  btn-sm" type="submit" value="حذف"
+                                           onclick="return confirm('آیا آیتم مورد نظر حذف گردد') "/>
                                     <i class="fa fa-trash-o"></i>
-                                    حذف
-                                </a>
-                                <a class="btn  btn-success  btn-sm" href="{{route('category.show',$category->id)}}" >
+                                </form>
+
+
+                                <a class="btn  btn-success  btn-sm" href="{{route('category.show',$category->id)}}">
                                     <i class="fa fa-view"></i>
                                     مشاهده
                                 </a>

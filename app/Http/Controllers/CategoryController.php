@@ -14,9 +14,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories=Category::query()->paginate(6);
-//       dd($categories);
-        return view("admin.category.list",compact('categories'));
+        $categories = Category::query()->paginate(6);
+        return view("admin.category.list", compact('categories'));
     }
 
     /**
@@ -32,33 +31,34 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request,Category $category)
+    public function store(Request $request)
     {
+        $category = new Category();
         $category->name = $request->name;
         $category->description = $request->description;
         $category->save();
         $msg = "عملیات موفقیت آمیز بود";
-        return redirect(route('category.index '))->with('success', $msg);
+        return back()->with('success', $msg);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show(Category $category)
     {
-        return view("admin.category.show",compact('category'));
+        return view("admin.category.show", compact('category'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit(Category $category)
@@ -69,18 +69,20 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Category $category)
     {
-        if ($request->name ||$request->description){
-            $category->name = $request->name;
-            $category->description = $request->description;
-            $category->update();
+//        dd($request->name);
+        if ($request->name or $request->description) {
+        $category->update([
+            "name" => $request->name,
+            "description" => $request->description,
+        ]);
             $msg = "عملیات  ویرایش با موفقیت انجام شد ";
-        }else{
+        } else {
             $msg = "مثداری برای ویرایش وارد نشده است  ";
         }
         return redirect(route('category.index'))->with('success', $msg);
@@ -89,18 +91,18 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy(Category $category)
     {
+        $category->delete();
+//       $cate=Category::find('id',$category->id)->get();
         try {
-            $category->delete();
             $msg = "آیتم مورد نظر حذف گردید";
-            return redirect(route('category.index'))->with('success', $msg);
+            return back()->with('success', $msg);
         } catch (Exception $exception) {
-
-            return redirect(route('category.index'))->with('warning', $exception->getCode());
+            return back()->with('warning', $exception->getCode());
         }
     }
 }

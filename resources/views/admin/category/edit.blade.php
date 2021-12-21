@@ -14,12 +14,12 @@
         </div>
         <div class="form-group">
             <label >نام </label>
-            <input type="text" class="form-control" name="title" placeholder="نام دسته بندی"
+            <input type="text" class="form-control" name="name" placeholder="نام دسته بندی"
                    value="{{$category->name}}">
         </div>
         <div class="form-group">
             <label >توضیحات</label>
-            <input type="text" class="form-control" name="slug" placeholder="نام مستعار"
+            <input type="text" class="form-control" name="description" placeholder="نام مستعار"
                    value="{{ $category->description }}">
         </div>
         <div class="card-footer">
