@@ -3,6 +3,7 @@
         <li class="breadcrumb-item"><a href="/admin">پنل مدیریت</a> </li>
         <li class="breadcrumb-item active" >لیست نظرات </li>
     @endslot
+@section('content')
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -36,38 +37,39 @@
                 <div class="card-body table-responsive p-0">
                     <table class="table table-hover">
                         <tbody><tr>
-                            <th>   شماره</th>
-                            <th>نام </th>
-                            <th>توضیحات</th>
-                            <th>وضعیت</th>
+                            <th>شماره</th>
+                            <th>نام کاربر </th>
+                            <th>ایمیل </th>
+                            <th>موضوع</th>
+                            <th>متن </th>
                             <th>اقدامات</th>
                         </tr>
                     @foreach($comments as $comment)
-                        @switch($comment->approved)
-                                @case(0)
-                                @php
-                                    $status="منتشر نشده "
-                                @endphp
-                                @break
+{{--                        @switch($comment->approved)--}}
+{{--                                @case(0)--}}
+{{--                                @php--}}
+{{--                                    $status="منتشر نشده "--}}
+{{--                                @endphp--}}
+{{--                                @break--}}
 
-                                @case(1)
-                                @php
-                                    $status="در انتظار تایید"
-                                @endphp
-                                @break
-                                @case(2)
-                                @php
-                                    $status="منتشر شده"
-                                @endphp
-                                @break
-                                @default
-                            @endswitch
+{{--                                @case(1)--}}
+{{--                                @php--}}
+{{--                                    $status="در انتظار تایید"--}}
+{{--                                @endphp--}}
+{{--                                @break--}}
+{{--                                @case(2)--}}
+{{--                                @php--}}
+{{--                                    $status="منتشر شده"--}}
+{{--                                @endphp--}}
+{{--                                @break--}}
+{{--                                @default--}}
+{{--                            @endswitch--}}
 
                             <tr>
                             <td>{{$loop->index+1}}</td>
-                            <td>{{$comment->user->name}} </td>
-                            <td>{{$comment->body}}</td>
-                            <td>{{$status}}</td>
+                            <td>{{$comment->nameUser}} </td>
+                            <td>{{$comment->Email}}</td>
+                            <td>{{$comment->title}}</td>
 {{--                            @if($user->email_verified_at)--}}
 {{--                            <td><span class="badge badge-success">فعال</span></td>--}}
 {{--                            @else--}}
@@ -75,7 +77,7 @@
 {{--                            @endif--}}
                             <td class="d-flex">
 
-                                <form action="{{route('admin.comment.destroy',['comment'=>$comment->id])}}" method="post">
+                                <form action="{{route('comment.destroy',['comment'=>$comment->id])}}" method="post">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-sm btn-danger">
@@ -83,7 +85,7 @@
                                     </button>
                                 </form>
 {{--                                @can('edit-user',$user)--}}
-                                    <a href="{{route('admin.comment.edit',['comment'=>$comment->id]) }}" class="btn btn-sm btn-info">ویرایش</a>
+                                    <a href="{{route('comment.edit',['comment'=>$comment->id]) }}" class="btn btn-sm btn-info">ویرایش</a>
 {{--                                @endcan--}}
                             </td>
                         </tr>
@@ -100,4 +102,5 @@
             <!-- /.card -->
         </div>
     </div>
+@endsection
 @endcomponent

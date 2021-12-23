@@ -375,18 +375,19 @@
     <div class="container">
         <div class="row get_touch_inner">
             <div class="col-lg-6">
-                <form class="contact_us_form row" action="contact_process.php" method="post" id="contactForm" novalidate="novalidate">
+                <form class="contact_us_form row" action="{{route("home.comment")}}"  method="POST" id="contactForm" >
+                    @csrf
                     <div class="form-group col-lg-6">
-                        <input type="text" class="form-control" id="name" name="name" placeholder="نام شما">
+                        <input type="text" class="form-control" id="name" name="nameUser" placeholder="نام شما">
                     </div>
                     <div class="form-group col-lg-6">
-                        <input type="email" class="form-control" id="email" name="email" placeholder="پست الکترونیک">
+                        <input type="email" class="form-control" id="email" name="Email" placeholder="پست الکترونیک">
                     </div>
                     <div class="form-group col-lg-12">
-                        <input type="text" class="form-control" id="subject" name="subject" placeholder="موضوع پیام*">
+                        <input type="text" class="form-control" id="subject" name="title" placeholder="موضوع پیام*">
                     </div>
                     <div class="form-group col-lg-12">
-                        <textarea class="form-control" name="message" id="message" rows="1" placeholder="متن پیام"></textarea>
+                        <textarea class="form-control" name="text" id="text" rows="1" placeholder="متن پیام"></textarea>
                     </div>
                     <div class="form-group col-lg-12">
                         <button type="submit" value="submit" class="btn submit_btn form-control">ارسال پیام</button>

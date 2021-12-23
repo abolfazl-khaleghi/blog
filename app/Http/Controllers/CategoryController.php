@@ -14,7 +14,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::query()->paginate(6);
+        $categories = Category::paginate(6);
         return view("admin.category.list", compact('categories'));
     }
 
@@ -41,6 +41,7 @@ class CategoryController extends Controller
         $category->description = $request->description;
         $category->save();
         $msg = "عملیات موفقیت آمیز بود";
+        alert()->success($msg);
         return back()->with('success', $msg);
     }
 
@@ -81,7 +82,9 @@ class CategoryController extends Controller
             "name" => $request->name,
             "description" => $request->description,
         ]);
+
             $msg = "عملیات  ویرایش با موفقیت انجام شد ";
+            alert()->success($msg);
         } else {
             $msg = "مثداری برای ویرایش وارد نشده است  ";
         }
@@ -100,6 +103,7 @@ class CategoryController extends Controller
 //       $cate=Category::find('id',$category->id)->get();
         try {
             $msg = "آیتم مورد نظر حذف گردید";
+            alert()->success($msg);
             return back()->with('success', $msg);
         } catch (Exception $exception) {
             return back()->with('warning', $exception->getCode());

@@ -54,7 +54,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                    <p>  این اثر توسط مرکز رسانه آستان قدس ایجاد شده است </p>
+                    <p>  در صورت نیاز به پشتیبانی به ما به آدرس www.dcorin.com مراجعه کنید </p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">خروج</button>

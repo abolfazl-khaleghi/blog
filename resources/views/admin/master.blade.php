@@ -39,14 +39,14 @@
 @include('admin.layouts.navbar')
     <!-- Main Sidebar Container -->
 
-{{--@include('admin.layouts.sidebar')--}}
+@include('admin.layouts.sidebar')
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         @yield('content')
     </div>
     <!-- /.content-wrapper -->
     <footer class="main-footer">
-        <strong>CopyLeft &copy; 2020 <a href="">مرکز رسانه آستان قدس</a>.</strong>
+        <strong>CopyLeft &copy; 2020 <a href="">پنل مدیریت سایت دکورین</a>.</strong>
     </footer>
 
     <!-- Control Sidebar -->

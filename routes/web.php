@@ -20,4 +20,14 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::resource('/category',App\Http\Controllers\CategoryController::class);
+Route::group(['middleware' => 'auth','prefix' => 'admin'], function () {
+    Route::resource('/category', App\Http\Controllers\CategoryController::class);
+    Route::resource('/articles', App\Http\Controllers\ArticlesController::class);
+    Route::resource('/comment', App\Http\Controllers\CommentController::class);
+
+});
+Route::get('/art', [App\Http\Controllers\ArticlesController::class,'indexHome'])->name("show.articles");
+Route::get('/art/{artical}', [App\Http\Controllers\ArticlesController::class,'showHome'])->name("show.article");
+
+Route::post('/comment', [App\Http\Controllers\CommentController::class,'store'])->name("home.comment");
+Route::get('/tag', [App\Http\Controllers\TagController::class,'index'])->name("tag.list");
